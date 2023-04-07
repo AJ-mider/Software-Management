@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{studyroom}+#{list}"></title>
+    <meta charset="UTF-8">
+    <link th:href="@{/easyui/themes/bootstrap/easyui.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/color.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/easyui/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            font-family: microsoft yahei;
+        }
+    </style>
+</head>
+<body>
+<div style="width:100%">
+    <a th:href="@{/student/studyroomList(lang='zh_CN')}">中文</a> &nbsp;&nbsp;&nbsp;
+    <a th:href="@{/student/studyroomList(lang='en_US')}">English</a>
+
+    <h2 th:text="#{studyroom}+#{list}"></h2>
+    <!--re-->
+    <table class="easyui-datagrid" fitColumns="true" id="dg"
+           pagination="true"
+           rownumbers="true" singleSelect="true"
+           th:title="#{studyroom}+#{message}" toolbar="#toolbarRoom" method="get">
+        <thead>
+        <tr>
+            <th field="studyRoomNum" width="10" th:text="#{studyroom}+#{num}"></th>
+            <th field="openTime" width="10" th:text="#{open}+#{time}"></th>
+            <th field="closeTime" width="10" th:text="#{close}+#{time}"></th>
+            <th field="operation" width="40" th:text="#{operation}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="studyroom : ${studyrooms}">
+            <td th:text="${studyroom.getStudyRoomNum()}"></td>
+            <td th:text="${studyroom.getOpenTime()}"></td>
+            <td th:text="${studyroom.getCloseTime()}"></td>
+            <td>
+                <a class="easyui-linkbutton" iconCls="icon-edit" th:href="@{/student/getSeatListOpen/} + ${studyroom.getStudyRoomNum()}">查看座位</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="easyui-linkbutton" iconCls="icon-edit" th:href="@{/student/rapidlyBooking}">快速预约</a>
+</div>
+
+<script type="text/javascript">
+</script>
+</body>
+</html>

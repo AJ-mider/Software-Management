@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>自习室预订系统管理 - 自习室管理</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/easyui/themes/bootstrap/easyui.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/color.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/easyui/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            font-family: microsoft yahei;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="#{booking}+#{seat}"></h2>
+<div id="win" class="easyui-panel" title="addBooking" style="width:500px;height:300px;">
+    <form id="addBooking" style="padding:10px 20px 10px 40px;" th:action="@{/student/addBookingSubmit}" method="post">
+        <p>学生学号：<input type="text" name="stuNum" th:value="${session.stuNum}"></p>
+        <!--re-->
+        <p>教室编号：<input type="text" name="studyroomId" th:value="${studyRoomNum}"></p>
+        <p>座位编号: <input type="number" name="seatId" th:value="${seatNumToEdit}"></p>
+        <p>预订开始时间: <input type="text" name="bookingPeriodStartTime"></p>
+        <p>预订结束时间: <input type="text" name="bookingPeriodEndTime"></p>
+        <div style="padding:5px;text-align:center;">
+            <button  class="easyui-linkbutton" icon="icon-ok" type="submit">save</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+</script>
+</body>
+</html>

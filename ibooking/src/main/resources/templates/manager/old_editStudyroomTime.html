@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>自习室预订系统管理 - 自习室管理</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/easyui/themes/bootstrap/easyui.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/color.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/easyui/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            font-family: microsoft yahei;
+        }
+    </style>
+</head>
+<body>
+<h2>add Seat</h2>
+<div id="win" class="easyui-panel" title="editStudyroomTimeSubmit" style="width:500px;height:300px;">
+    <form id="editStudyroomTime" style="padding:10px 20px 10px 40px;" th:action="@{/manager/editStudyroomTimeSubmit}" method="post">
+        <p>studyroomNum: <input type="text" name="studyroomNum" th:value="${studyroomToEdit.getStudyRoomNum()}"></p>
+        <p>openTime: <input type="number" name="openTime" th:value="${studyroomToEdit.getOpenTime()}"></p>
+        <p>closeTime: <input type="number" name="closeTime" th:value="${studyroomToEdit.getCloseTime()}"></p>
+        <p style="color:red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+        <div style="padding:5px;text-align:center;">
+            <button  class="easyui-linkbutton" icon="icon-ok" type="submit">save</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+</script>
+</body>
+</html>

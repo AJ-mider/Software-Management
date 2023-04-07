@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huawei.ibooking.mapper.SeatMapper">
+    <resultMap id="seat" type="com.huawei.ibooking.model.SeatDO"/>
+
+
+    <select id="getSeats" resultMap="seat" parameterType="java.lang.String">
+        select id, studyroomNum, seatNum
+        from tbl_seat
+        where studyroomNum = #{studyroomNum}
+    </select>
+    <select id="getSeat" resultMap="seat" >
+        select id, studyroomNum, seatNum,isBooking
+        from tbl_seat
+        where studyroomNum = #{studyroomNum} and seatNum=#{seatNum}
+    </select>
+    <select id="getSeatsOpen" resultMap="seat" parameterType="java.lang.String">
+        select id, studyroomNum, seatNum
+        from tbl_seat
+        where studyroomNum = #{studyroomNum}
+          and isBooking = false;
+    </select>
+
+    <select id="getEmptyRoom" resultType="java.lang.String" >
+        select studyroomNum
+        from tbl_seat
+        where isBooking = false
+        limit 1;
+    </select>
+
+    <select id="getEmptySeat" resultType="java.lang.Integer">
+        select seatNum
+        from tbl_seat
+        where studyroomNum = #{studyroomNum}
+        limit 1;
+    </select>
+
+
+    <update id="saveSeat" parameterType="com.huawei.ibooking.model.SeatDO">
+        insert into tbl_seat (studyroomNum, seatNum,isBooking)
+        values (#{seat.studyroomNum}, #{seat.seatNum},#{seat.isBooking})
+    </update>
+
+    <update id="updateSeat" parameterType="java.lang.Integer">
+        update tbl_seat
+        set isBooking=true
+        where seatNum=#{seatNum}
+    </update>
+
+    <delete id="deleteSeat">
+        delete
+        from tbl_seat
+        where studyroomNum = #{studyroomNum}
+          and seatNum = #{seatNum}
+    </delete>
+
+
+
+
+<!--&lt;!&ndash;0&ndash;&gt;-->
+<!--    <select id="getStudyroomNum" resultMap="seat" parameterType="java.lang.String">-->
+<!--        select studyroomNum-->
+<!--        from tbl_seat-->
+<!--        where seatNum = #{seatNum}-->
+<!--    </select>-->
+
+
+
+</mapper>

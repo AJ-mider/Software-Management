@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huawei.ibooking.mapper.ManagerMapper">
+    <resultMap id="manager" type="com.huawei.ibooking.model.ManagerDO"/>
+
+    <select id="getManagers" resultMap="manager">
+        select id, managerNum, name, password
+        from tbl_manager
+    </select>
+
+    <select id="getManager" resultMap="manager" parameterType="java.lang.String">
+        select id, managerNum, name, password
+        from tbl_manager
+        where managerNum = #{managerNum}
+    </select>
+
+    <update id="saveManager" parameterType="com.huawei.ibooking.model.ManagerDO">
+        merge into tbl_manager (managerNum, name, password) key (managerNum)
+            values (#{manager.managerNum}, #{manager.name}, #{manager.password})
+    </update>
+
+    <delete id="deleteManager" parameterType="java.lang.String">
+        delete
+        from tbl_manager
+        where managerNum = #{managerNum}
+    </delete>
+</mapper>

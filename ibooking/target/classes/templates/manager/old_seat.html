@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>自习室预订系统管理 - 自习室管理</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/easyui/themes/bootstrap/easyui.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/easyui/themes/color.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/easyui/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript"></script>
+    <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            font-family: microsoft yahei;
+        }
+    </style>
+</head>
+<body>
+<div style="width:100%">
+<h2>自习室管理</h2>
+
+    <table class="easyui-datagrid" fitColumns="true" id="dg"
+       pagination="true"
+       rownumbers="true" singleSelect="true"
+       title="自习室信息" toolbar="#toolbarRoom" method="get">
+    <thead>
+    <tr>
+        <th field="studyroomId" width="10">studyroomId</th>
+        <th field="seatNum" width="10">seatNum</th>
+        <th field="operation" width="20" th:text="#{operation}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="seat : ${seats}">
+        <td th:text="${seat.getStudyroomNum()}"></td>
+        <td th:text="${seat.getSeatNum()}"></td>
+        <td>
+            <a class="easyui-linkbutton" iconCls="icon-remove">remove</a>
+        </td>
+    </tr>
+    </tbody>
+
+    </table>
+    <div id="toolbarRoom">
+        <a class="easyui-linkbutton" th:href="@{/manager/addSeat/}+${seats[0].getStudyroomNum()}" iconCls="icon-add"
+           plain="true">add new seat</a>
+    </div>
+</div>
+<a th:href="@{/seat.html(lang='zh_CN')}">中文</a> &nbsp;&nbsp;&nbsp;
+<a th:href="@{/seat.html(lang='en_US')}">English</a>
+<script type="text/javascript">
+</script>
+</body>
+</html>

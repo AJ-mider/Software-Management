@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.ibooking.mapper.BookingMapper">
+    <resultMap id="booking" type="com.huawei.ibooking.model.BookingDO"/>
+
+<!--    这里的id可以看作是Dao文件中的函数名称，DAO中调用函数，这里实现函数。-->
+    <select id="getBookings" resultMap="booking" parameterType="java.lang.String">
+        select id, seatId, stuNum, bookingPeriodStartTime, bookingPeriodEndTime,StudyroomNum
+        from tbl_booking
+        where stuNum = #{stuNum}
+    </select>
+
+
+    <!--re-->
+    <update id="saveBooking" parameterType="com.huawei.ibooking.model.BookingDO">
+        insert into tbl_booking (seatId, stuNum, bookingPeriodStartTime, bookingPeriodEndTime,studyroomNum)
+        values (#{bookingDO.seatId}, #{bookingDO.stuNum}, #{bookingDO.bookingPeriodStartTime}, #{bookingDO.bookingPeriodEndTime},#{bookingDO.studyroomNum})
+    </update>
+
+</mapper>
